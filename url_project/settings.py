@@ -1,6 +1,7 @@
-import dj_database_url
 import os
+import dotenv
 
+load_dotenv()
 
 """
 Django settings for app project.
@@ -88,9 +89,9 @@ WSGI_APPLICATION = 'url_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'koyebdb',
-        'USER': 'koyeb-adm',
-        'PASSWORD': 'npg_HiywktIhND95',
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
         'HOST': 'ep-purple-hall-a4dwghf4.us-east-1.pg.koyeb.app',
         'OPTIONS': {'sslmode': 'require'},
     }
