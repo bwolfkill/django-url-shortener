@@ -1,4 +1,5 @@
 import dj_database_url
+import os
 
 
 """
@@ -28,7 +29,7 @@ SECRET_KEY = 'django-insecure-97ta&e#3u%ldg$1*f86z2ac4nv-gw44d3q(v7^98+9#$53x3oc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1[::1]').split(',')
 
 
 # Application definition
@@ -77,11 +78,22 @@ WSGI_APPLICATION = 'url_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         conn_max_age=600,
+#         conn_health_checks=True,
+#     )
+# }
+
 DATABASES = {
-    'default': dj_database_url.config(
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'koyebdb',
+        'USER': 'koyeb-adm',
+        'PASSWORD': 'npg_HiywktIhND95',
+        'HOST': 'ep-purple-hall-a4dwghf4.us-east-1.pg.koyeb.app',
+        'OPTIONS': {'sslmode': 'require'},
+    }
 }
 
 
